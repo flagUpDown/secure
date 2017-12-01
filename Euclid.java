@@ -1,6 +1,7 @@
 package secure;
 
 import java.math.BigInteger;
+import java.util.Scanner;
 
 public class Euclid
 {
@@ -24,6 +25,8 @@ public class Euclid
 	{
 		BigInteger a=new BigInteger(u);
 		BigInteger b=new BigInteger(w);
+		a=a.abs();
+		b=b.abs();
 		BigInteger x,y;
 		BigInteger[] array=new BigInteger[3];
 		if(b.compareTo(BigInteger.ZERO)==0)
@@ -66,11 +69,18 @@ public class Euclid
 		
 	}
 
-	public static void main(String[] args)
-	{
-		//BigInteger result=Euclid.gcd("112","8");
-		BigInteger result2[]=Euclid.extend_gcd("7","5");
-		System.out.println(result2[0].toString()+"  "+result2[1]+"  "+result2[2]);
-	}
+public static void main(String[] args)
+{
+	System.out.println("请输入两个正整数：");
+	Scanner in=new Scanner(System.in);
+	String a,b;
+	a=in.next();
+	b=in.next();
+	in.close();
+	BigInteger result=Euclid.gcd(a,b);
+	System.out.println(result);
+	BigInteger result2[]=Euclid.extend_gcd(a,b);
+	System.out.println(result2[0].toString()+"  "+result2[1]+"  "+result2[2]);
+}
 
 }

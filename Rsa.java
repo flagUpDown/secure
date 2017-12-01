@@ -33,24 +33,28 @@ public class Rsa
 		return result;
 	}
 	
-	public static BigInteger encryption(BigInteger m,BigInteger n,BigInteger e)
+	public static BigInteger modPow(BigInteger m,BigInteger n,BigInteger e)
 	{
 		return m.modPow(e, n);
 	}
 	
-	public static BigInteger decipher(BigInteger c,BigInteger n,BigInteger d)
-	{
-		return c.modPow(d, n);
-	}
 
-	public static void main(String[] args)
-	{
-		BigInteger[] test=Rsa.create_key();
-		System.out.println(test[0].toString()+"\n"+test[1]+"\n"+test[2]);
-		BigInteger c=Rsa.encryption(new BigInteger("345678"), test[0], test[1]);
-		System.out.println(c);
-		BigInteger m=Rsa.encryption(c, test[0], test[2]);
-		System.out.println(m);
-	}
+public static void main(String[] args)
+{	
+	BigInteger[] test=Rsa.create_key();
+	System.out.println("所选取的两个大素数的乘积："+test[0]);
+	System.out.println("随机选取的e："+test[1]);
+	System.out.println("e的逆元："+test[2]);
+	System.out.println("明文：233333333333");
+	BigInteger m=new BigInteger("233333333333");
+	BigInteger c=Rsa.modPow(m, test[0], test[1]);
+	System.out.println("密文："+c);
+	m=Rsa.modPow(c, test[0], test[2]);
+	System.out.println("由密文解出明文："+m);
+	c=Rsa.modPow(m, test[0], test[2]);
+	System.out.println("数字签名（233333333333）得："+c);
+	m=Rsa.modPow(c, test[0], test[1]);
+	System.out.println("数字签名认证："+m);
+}
 
 }

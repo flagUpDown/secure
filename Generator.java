@@ -3,6 +3,7 @@ package secure;
 import java.math.BigInteger;
 import java.util.HashSet;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Generator
 {
@@ -142,9 +143,12 @@ public class Generator
 	
 	public static void main(String[] args)
 	{
-		System.out.println(multiple(new BigInteger("13")));
-		System.out.println(compose(new BigInteger("13")));
-		System.out.println(all_multiple(new BigInteger("13"),new BigInteger("2")));
-		System.out.println(rand_multiple(new BigInteger("13"),new BigInteger("2")));
+		System.out.println("请输入一个素数：");
+		Scanner in=new Scanner(System.in);
+		BigInteger prime=new BigInteger(in.next());
+		in.close();
+		System.out.println("最小生成元："+multiple(prime));
+		System.out.println("所有的生成元："+all_multiple(new BigInteger("13"),new BigInteger("2")));
+		System.out.println("随机选取一个生成元："+rand_multiple(new BigInteger("13"),new BigInteger("2")));
 	}
 }
